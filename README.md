@@ -16,7 +16,7 @@ gem 'omniauth-airtable'
 
 ```ruby
 use OmniAuth::Builder do
-  provider :airtable, ENV['AIRTABLE_CLIENT_ID'], ENV['AIRTABLE_CLIENT_SECRET'], { scope: 'useraccount', client_options: { site: 'https://<instance-id>.airtable.com' } }
+  provider :airtable, ENV['AIRTABLE_CLIENT_ID'], ENV['AIRTABLE_CLIENT_SECRET'], { scope: 'data.records:read data.records:write schema.bases:read schema.bases:write' }
 end
 ```
 
@@ -26,7 +26,7 @@ In `config/initializers/airtable.rb`
 
 ```ruby
   Rails.application.config.middleware.use OmniAuth::Builder do
-    provider :airtable, ENV['AIRTABLE_CLIENT_ID'], ENV['AIRTABLE_CLIENT_SECRET'], { scope: 'useraccount', client_options: { site: 'https://<instance-id>.airtable.com' } }
+    provider :airtable, ENV['AIRTABLE_CLIENT_ID'], ENV['AIRTABLE_CLIENT_SECRET'], { scope: 'data.records:read data.records:write schema.bases:read schema.bases:write' }
   end
 ```
 
@@ -41,7 +41,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     env['omniauth.strategy'].options[:client_id] = req.params['client_id']
     env['omniauth.strategy'].options[:client_secret] = req.params['client_secret']
   end
-  provider :airtable, nil, nil, { setup: setup_proc, scope: 'useraccount' }
+  provider :airtable, nil, nil, { setup: setup_proc, scope: 'data.records:read data.records:write schema.bases:read schema.bases:write' }
 end
 ```
 
